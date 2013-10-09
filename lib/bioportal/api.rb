@@ -21,11 +21,22 @@ module Bioportal
       nil # no filename
     end
 
-    def download_ontology(acronym, submission_id, output)
-      `curl --silent '#{BASE_URI}ontologies/#{acronym}/submissions/#{submission_id}/download' -H 'Authorization: #{authorization}' > '#{output}'`
+    def download_ontology(acronym, submission_id, file)
+      output = nil
+      url    = "#{BASE_URI}ontologies/#{acronym}/submissions/#{submission_id}/download"
+      args   = 'curl', url,
+        '--header', "Authorization: #{authorization}",
+        '--output', file.to_s,
+        '--silent',
+        '--fail',
+        '--show-error'
+
+      # run it and save stderr and stdout in output
+      IO.popen(args, :err=>[:child, :out]){|f| output = f.gets }
+
       if $?.to_i != 0
-        `rm '#{output}'`
-        raise "download failed"
+        file.unlink if file.exist?
+        raise DownloadError, "Download of #{url} failed: #{output}"
       end
     end
 

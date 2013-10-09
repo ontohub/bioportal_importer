@@ -7,6 +7,8 @@ require 'bioportal/submission'
 
 module Bioportal
 
+  class DownloadError < ::Exception; end
+
   def self.apikey=(value)
     API.apikey = value
   end

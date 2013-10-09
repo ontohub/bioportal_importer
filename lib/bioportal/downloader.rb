@@ -18,7 +18,11 @@ module Bioportal
         threads << Thread.new do
           while obj = queue.pop(true)
             puts "[#{i}] Downloading #{obj}"
-            obj.download
+            begin
+              obj.download
+            rescue DownloadError => e
+              STDERR.puts "[#{i}] #{e.message}"
+            end
           end
         end
       end
