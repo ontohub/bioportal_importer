@@ -1,6 +1,7 @@
 require 'singleton'
 
 require 'bioportal/api'
+require 'bioportal/downloader'
 require 'bioportal/ontology'
 require 'bioportal/submission'
 

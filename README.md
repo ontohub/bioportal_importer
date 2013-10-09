@@ -20,8 +20,14 @@ Installation
 Usage
 -----
 
+Start the interactive ruby console:
+
     APIKEY=<your-bioportal-apikey> ./console
+
+Download metadata of ontologies and submissions:
+
     Bioportal.import_all
-    Bioportal::Ontology.count
-    Bioportal::Submission.count
-    exit
+
+Download the file for each sumission:
+
+    Bioportal::Downloader.run

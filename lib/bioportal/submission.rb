@@ -23,10 +23,14 @@ module Bioportal
       obj
     end
 
+    def to_s
+      "#{acronym}-#{submission_id}"
+    end
+
     def tmp_path
       dir = BASEDIR.join("submissions")
       dir.mkpath
-      dir.join("#{acronym}-#{submission_id}")
+      dir.join(to_s)
     end
 
     def download
