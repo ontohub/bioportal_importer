@@ -15,6 +15,10 @@ module Bioportal
     import_ontology_submissions
   end
 
+  def self.import_files
+    `cd #{WORKSPACE} && git init`
+  end
+
   def self.import_ontologies
     API.instance.ontologies.each do |attributes|
       Ontology.import(attributes)

@@ -4,8 +4,13 @@ require 'rubygems'
 require 'bundler/setup'
 require 'rest-client'
 require 'json'
+require 'pathname'
 
 $:.unshift File.dirname(__FILE__)
+
+BASEDIR   = Pathname.new(File.dirname(__FILE__)).join("..")
+WORKSPACE = BASEDIR.join("workspace")
+WORKSPACE.mkpath
 
 require 'active_record'
 require "bioportal"
@@ -28,6 +33,7 @@ if !Bioportal::Ontology.table_exists?
     t.references :ontology, null: false
     t.integer :submission_id, null: false
     t.datetime :created_at, null: false
+    t.datetime :imported_at
     t.string :language
     t.string :version
     t.string :contact_name, :contact_email

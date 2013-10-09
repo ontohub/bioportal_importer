@@ -21,12 +21,24 @@ module Bioportal
       nil # no filename
     end
 
+    def download_ontology(acronym, submission_id, output)
+      `curl '#{BASE_URI}ontologies/#{acronym}/submissions/#{submission_id}/download' -H 'Authorization: #{authorization}' > '#{output}'`
+      if $?.to_i != 0
+        `rm '#{output}'`
+        raise "download failed"
+      end
+    end
+
     protected
+
+    def authorization
+      "apikey token=#{apikey}"
+    end
 
     def headers
       {
         accept:        :json,
-        authorization: "apikey token=#{apikey}"
+        authorization: authorization
       }
     end
 
