@@ -18,6 +18,7 @@ if !Bioportal::Ontology.table_exists?
 
   ActiveRecord::Base.connection.create_table(:ontologies) do |t|
     t.string :acronym, :name, null: false
+    t.string :filename
   end
   ActiveRecord::Base.connection.change_table(:ontologies) do |t|
     t.index :acronym, unique: true

@@ -5,8 +5,9 @@ module Bioportal
     has_many :submissions, -> { order :submission_id }
 
     def self.import(json)
-      obj      = find_or_initialize_by(acronym: json['acronym'])
-      obj.name = json['name']
+      obj          = find_or_initialize_by(acronym: json['acronym'])
+      obj.name     = json['name']
+      obj.filename = API.instance.ontology_filename(json['acronym'])
       
       obj.save! if obj.changed?
 

@@ -14,16 +14,34 @@ module Bioportal
       get "ontologies/#{acronym}/submissions"
     end
 
+    def ontology_filename(acronym)
+      response = head "ontologies/#{acronym}/download"
+      response.headers[:content_disposition].match(/filename="(.+)"/)[1]
+    rescue RestClient::ResourceNotFound
+      nil # no filename
+    end
+
     protected
 
-    def get(path)
-      raise "apikey not set" unless apikey
-      
-      result = RestClient.get "#{BASE_URI}#{path}",
+    def headers
+      {
         accept:        :json,
         authorization: "apikey token=#{apikey}"
+      }
+    end
 
-      JSON.parse result
+    def get(path)
+      JSON.parse(call :get, path)
+    end
+
+    def head(path)
+      call :head, path
+    end
+
+    def call(method, path)
+      raise "apikey not set" unless apikey
+      
+      RestClient.send(method, "#{BASE_URI}#{path}", headers)
     end
   end
 
