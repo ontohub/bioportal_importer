@@ -33,9 +33,10 @@ if !Bioportal::Ontology.table_exists?
     t.references :ontology, null: false
     t.integer :submission_id, null: false
     t.datetime :created_at, null: false
-    t.datetime :imported_at
+    t.datetime :committed_at
     t.string :language
     t.string :version
+    t.text   :description
     t.string :contact_name, :contact_email
   end
   ActiveRecord::Base.connection.change_table(:submissions) do |t|

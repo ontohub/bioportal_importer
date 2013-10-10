@@ -19,6 +19,15 @@ module Bioportal
         submissions.import(json)
       end
     end
+
+    # commits all submissions into to the repository
+    def commit
+      submissions.each(&:commit)
+    end
+
+    def filesize
+      submissions.last.try(:filesize)
+    end
   end
   
 end
