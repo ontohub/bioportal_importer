@@ -69,10 +69,13 @@ module Bioportal
         # copy file to workspace
         FileUtils.copy tmp_path, filename
 
-        # commit file
-        system 'git', 'add', filename
-        system env, 'git', 'commit', '-m', version, filename
-        raise "commit failed" if $?.to_i != 0
+        # has anything changed?
+        if `git status -s` != ''
+          # then add and commit
+          system 'git', 'add', filename
+          system env, 'git', 'commit', '-m', version, filename
+          raise "commit failed" if $?.to_i != 0
+        end
       end
 
       self.committed_at = Time.now
