@@ -54,6 +54,9 @@ module Bioportal
     def commit
       raise "filename missing" unless filename
 
+      contact_name  = self.contact_name  || 'nobody'
+      contact_email = self.contact_email || 'nobody@bioportal'
+
       env = {
         'GIT_AUTHOR_DATE'     => created_at.iso8601,
         'GIT_AUTHOR_NAME'     => contact_name,
@@ -73,7 +76,11 @@ module Bioportal
         if `git status -s` != ''
           # then add and commit
           system 'git', 'add', filename
-          system env, 'git', 'commit', '-m', version, filename
+
+          message = version
+          message = '-' if version.blank?
+          
+          system env, 'git', 'commit', '-m', message, filename
           raise "commit failed" if $?.to_i != 0
         end
       end
