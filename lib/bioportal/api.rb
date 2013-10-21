@@ -10,8 +10,8 @@ module Bioportal
       get 'ontologies'
     end
 
-    def ontology_submissions(acronym)
-      get "ontologies/#{acronym}/submissions"
+    def ontology_resource(acronym, resource_name)
+      get "ontologies/#{acronym}/#{resource_name}"
     end
 
     def ontology_filename(acronym)
