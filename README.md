@@ -31,3 +31,13 @@ Download metadata of ontologies and submissions:
 Download the file for each sumission:
 
     Bioportal::Downloader.run
+
+Create a repository with all downloaded submissions of ontologies below 1 megabyte:
+
+    Bioportal.reset_workspace
+    Bioportal::Submission.uncommitted.order(:created_at).each do |s|
+        size = s.ontology.filesize
+        s.commit if s.downloaded? && size && size < 1024*1024
+    end
+
+Now you can find the repository in ./workspace/.git

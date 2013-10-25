@@ -18,8 +18,10 @@ module Bioportal
     import_ontology_submissions
   end
 
-  def self.import_files
-    `cd #{WORKSPACE} && git init`
+  def self.reset_workspace
+    WORKSPACE.rmtree if WORKSPACE.exist?
+    WORKSPACE.mkpath
+    `cd '#{WORKSPACE}' && git init`
   end
 
   def self.import_ontologies

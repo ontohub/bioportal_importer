@@ -10,7 +10,6 @@ $:.unshift File.dirname(__FILE__)
 
 BASEDIR   = Pathname.new(File.dirname(__FILE__)).join("..")
 WORKSPACE = BASEDIR.join("workspace")
-WORKSPACE.mkpath
 
 require 'active_record'
 require "bioportal"
