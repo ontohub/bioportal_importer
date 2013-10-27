@@ -3,7 +3,7 @@ module Bioportal
   class Submission < ActiveRecord::Base
 
     belongs_to :ontology
-    delegate :acronym, :filename, to: :ontology
+    delegate :acronym, :normalized_filename, to: :ontology
 
     scope :committed,   ->{ where "committed_at IS NOT null" }
     scope :uncommitted, ->{ where committed_at: nil }
@@ -52,8 +52,7 @@ module Bioportal
     end
 
     def commit
-      raise "filename missing" unless filename
-
+      filename      = normalized_filename
       contact_name  = self.contact_name  || 'nobody'
       contact_email = self.contact_email || 'nobody@bioportal'
 
