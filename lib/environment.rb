@@ -4,15 +4,23 @@ require 'rubygems'
 require 'bundler/setup'
 require 'rest-client'
 require 'json'
+require 'yaml'
 require 'pathname'
+require 'active_record'
+require 'active_resource'
 
 $:.unshift File.dirname(__FILE__)
 
+require 'bioportal'
+require 'ontohub'
+
+
 BASEDIR   = Pathname.new(File.dirname(__FILE__)).join("..")
 WORKSPACE = BASEDIR.join("workspace")
+CONFIG    = YAML.load_file BASEDIR.join('config.yml')
 
-require 'active_record'
-require "bioportal"
+Bioportal.apikey = CONFIG['bioportal']['apikey']
+Ontohub.config   = CONFIG['ontohub']
 
 require 'sqlite3'
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => "db.sqlite3")

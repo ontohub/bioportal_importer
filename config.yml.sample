@@ -1,0 +1,6 @@
+bioportal:
+  apikey: your-api-key
+
+ontohub:
+  site: http://admin%40example.com:foobar@develop.ontohub.org/api/v1/
+  repository_path: bioportal

@@ -4,6 +4,7 @@ module Bioportal
 
     has_many :submissions, -> { order :submission_id }
     before_create :refresh_subresources
+    delegate :description, to: :last_submission
 
     def self.import(json)
       obj            = find_or_initialize_by(acronym: json['acronym'])
@@ -12,6 +13,10 @@ module Bioportal
       obj.save! if obj.changed?
 
       obj
+    end
+
+    def last_submission
+      submissions.last
     end
 
     def import_submissions

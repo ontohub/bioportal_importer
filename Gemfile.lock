@@ -10,6 +10,10 @@ GEM
       activesupport (= 4.0.0)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activeresource (4.0.0)
+      activemodel (~> 4.0)
+      activesupport (~> 4.0)
+      rails-observers (~> 0.1.1)
     activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -23,6 +27,8 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.1)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     sqlite3 (1.3.8)
@@ -35,5 +41,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 4.0)
+  activeresource (~> 4.0)
   rest-client (~> 1.6)
   sqlite3

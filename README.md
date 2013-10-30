@@ -16,13 +16,19 @@ Installation
     cd bioportal_importer
     bundle install
 
+Configuration
+-------------
+
+Copy the `config.yml.sample` to `config.yml` and fill in your credentials.
+
+    cp config.yml.sample config.yml
 
 Usage
 -----
 
 Start the interactive ruby console:
 
-    APIKEY=<your-bioportal-apikey> ./console
+    ./console
 
 Download metadata of ontologies and submissions:
 
@@ -41,3 +47,7 @@ Create a repository with all downloaded submissions of ontologies below 1 megaby
     end
 
 Now you can find the repository in ./workspace/.git
+
+After pushing the repository to Ontohub you can update the ontologies metadata at Ontohub:
+
+    Ontohub::API.instance.update_metadata
