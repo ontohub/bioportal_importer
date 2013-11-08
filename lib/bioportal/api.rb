@@ -17,7 +17,7 @@ module Bioportal
     def ontology_filename(acronym)
       response = head "ontologies/#{acronym}/download"
       response.headers[:content_disposition].match(/filename="(.+)"/)[1]
-    rescue RestClient::ResourceNotFound
+    rescue RestClient::ResourceNotFound, RestClient::Forbidden
       nil # no filename
     end
 
