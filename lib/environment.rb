@@ -25,7 +25,10 @@ Ontohub.config   = CONFIG['ontohub']
 
 require 'sqlite3'
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => "db.sqlite3")
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+if ENV['DEBUG']
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
 
 if !Bioportal::Ontology.table_exists?
   require 'bioportal/tables'
