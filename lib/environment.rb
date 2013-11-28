@@ -11,6 +11,7 @@ require 'active_resource'
 
 $:.unshift File.dirname(__FILE__)
 
+require 'string'
 require 'bioportal'
 require 'ontohub'
 
