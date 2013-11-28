@@ -11,6 +11,7 @@ end
 ActiveRecord::Base.connection.create_table(:submissions) do |t|
   t.references :ontology, null: false
   t.integer :submission_id, null: false
+  t.integer :filesize
   t.datetime :created_at, null: false
   t.datetime :committed_at
   t.string :language

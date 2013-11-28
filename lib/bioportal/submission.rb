@@ -39,12 +39,8 @@ module Bioportal
 
     def download
       API.instance.download_ontology(acronym, submission_id, tmp_path)
-    end
-
-    def filesize
-      tmp_path.size
-    rescue Errno::ENOENT
-      nil
+      self.filesize = tmp_path.size
+      save!
     end
 
     def downloaded?
