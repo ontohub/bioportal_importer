@@ -28,10 +28,18 @@ module Bioportal
     API.instance.ontologies.each do |attributes|
       Ontology.import(attributes)
     end
+    puts "ontologies imported".green
   end
 
   def self.import_ontology_submissions
-    Ontology.find_each(&:import_submissions)
+    Ontology.find_each do |ontology|
+      begin
+        ontology.import_submissions
+        puts "submissions of #{ontology} imported".green
+      rescue RestClient::RequestFailed => e
+        STDERR.puts "failed to import submissions of #{ontology}: #{e.message}".red
+      end
+    end
   end
 
 end
