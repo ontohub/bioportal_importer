@@ -15,6 +15,10 @@ module Bioportal
       obj
     end
 
+    def to_s
+      acronym
+    end
+
     def last_submission
       submissions.last
     end
