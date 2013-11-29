@@ -19,6 +19,8 @@ module Bioportal
   end
 
   def self.reset_workspace
+    Submission.update_all committed_at: nil
+
     WORKSPACE.rmtree if WORKSPACE.exist?
     WORKSPACE.mkpath
     `cd '#{WORKSPACE}' && git init`

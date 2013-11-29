@@ -5,6 +5,7 @@ module Bioportal
     belongs_to :ontology
     delegate :acronym, :normalized_filename, to: :ontology
 
+    scope :downloaded,  ->{ where "filesize IS NOT null" }
     scope :committed,   ->{ where "committed_at IS NOT null" }
     scope :uncommitted, ->{ where committed_at: nil }
 

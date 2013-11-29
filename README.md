@@ -41,9 +41,8 @@ Download the file for each sumission:
 Create a repository with all downloaded submissions of ontologies below 1 megabyte:
 
     Bioportal.reset_workspace
-    Bioportal::Submission.uncommitted.order(:created_at).each do |s|
-        size = s.ontology.filesize
-        s.commit if s.downloaded? && size && size < 1024*1024
+    Bioportal::Submission.uncommitted.downloaded.order(:created_at).each do |s|
+        s.commit if s.ontology.max_filesize < 1024*1024
     end
 
 Now you can find the repository in ./workspace/.git

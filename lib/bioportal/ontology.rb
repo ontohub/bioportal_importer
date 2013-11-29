@@ -45,6 +45,10 @@ module Bioportal
       submissions.last.try(:filesize)
     end
 
+    def max_filesize
+      submissions.maximum(:filesize)
+    end
+
     def normalized_filename
       if match = filename.to_s.match(/.+\.([a-z]{3,5})/i)
         "#{acronym}.#{match[1].downcase}"
