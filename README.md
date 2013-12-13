@@ -23,6 +23,17 @@ Copy the `config.yml.sample` to `config.yml` and fill in your credentials.
 
     cp config.yml.sample config.yml
 
+If you want to specify a mapping of categories from bioportal to categories from bioportal, then create a `category-mapping.csv` in the project repository with the following columns:
+
+```
+acronym,target1,target2,target3
+Chemical,Chemistry,Biochemistry,
+Mouse_Anatomy,Space,Biology,Veterinary
+```
+
+A bioportal category can map to multiple ontohub categories.
+Just add as many target* columns as you want.
+
 Usage
 -----
 

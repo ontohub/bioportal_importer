@@ -6,6 +6,10 @@ module Bioportal
 
     BASE_URI = 'http://data.bioontology.org/'
 
+    def categories
+      get 'categories'
+    end
+
     def ontologies
       get 'ontologies'
     end

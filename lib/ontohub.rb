@@ -1,4 +1,5 @@
 require 'ontohub/api'
+require 'ontohub/category_mapping'
 
 module Ontohub
 
